@@ -1,0 +1,23 @@
+{
+  "name": "Udemy Enhancer",
+  "version": "0.1.0",
+  "manifest_version": 3,
+  "description": "A useful tool to improve the user experience of Udemy.",
+  "icons": {
+    "16": "dist/images/magic-wand16.png",
+    "32": "dist/images/magic-wand32.png",
+    "48": "dist/images/magic-wand48.png",
+    "128": "dist/images/magic-wand128.png"
+  },
+  "background": {
+    "service_worker": "dist/js/index.js"
+  },
+  "options_page": "dist/option.html",
+  "content_scripts": [
+    {
+      "matches": ["https://*.udemy.com/*"],
+      "js": ["dist/js/injector.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
