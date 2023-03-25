@@ -9,6 +9,8 @@
     "48": "dist/images/magic-wand48.png",
     "128": "dist/images/magic-wand128.png"
   },
+  "permissions": ["webRequest", "https://*.udemy.com/*", "storage", "declarativeNetRequest", "declarativeNetRequestFeedback"],
+  "host_permissions": ["https://*.udemy.com/*"],
   "background": {
     "service_worker": "dist/js/index.js"
   },
@@ -17,7 +19,7 @@
     {
       "matches": ["https://*.udemy.com/*"],
       "js": ["dist/js/injector.js"],
-      "run_at": "document_start"
+      "run_at": "document_end"
     }
   ]
 }
