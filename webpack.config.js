@@ -17,10 +17,11 @@ module.exports = (env, argv) => {
       index: './js/index.js',
       injector: './js/injector.js',
       option: './js/option.js',
+      popup: './js/popup.js',
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: './js/[name].js?[chunkhash]'
+      filename: './js/[name].js'
     },
     devServer: {
       compress: true,
@@ -136,7 +137,7 @@ module.exports = (env, argv) => {
         template: './pug/' + name + '.pug',
         filename: name + '.html',
         inject: true,
-        chunks: ['index'],
+        chunks: [name],
         minify: {
           sortAttributes: true,
           collapseWhitespace: false,

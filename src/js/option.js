@@ -1,1 +1,1 @@
-console.log('hihihiccccccccccccccccc')
+import '../css/option.scss';

@@ -1,23 +1,20 @@
 // 在 extension 背景運行的檔案
-import '../css/option.scss';
 
-chrome.runtime.onInstalled.addListener(async () => {
+const checkingUrl = 'https://www.udemy.com';
+
+chrome.runtime.onInstalled.addListener(() => {
   chrome.action.disable();
+});
 
-  // remove existing rules so only ours are applied
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
-    // add a custom rule
-    chrome.declarativeContent.onPageChanged.addRules([
-      {
-        // define the rule's conditions
-        conditions: [
-          new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: { hostSuffix: 'https://www.udemy.com/' },
-          }),
-        ],
-        // show the action when conditions are met
-        actions: [new chrome.declarativeContent.ShowAction()],
-      },
-    ]);
+// onActivated: 瀏覽器 tab 切換時觸發
+// 透過 chrome.tabs.get 和 tabId 去取得該 tab 的詳細資訊
+chrome.tabs.onActivated.addListener((activeInfo) => {
+  chrome.tabs.get(activeInfo.tabId, (tab) => {
+    const isLoadingUdemyWebsite = tab.status === 'loading';
+    if (tab.url.includes(checkingUrl) || (isLoadingUdemyWebsite && tab.pendingUrl.includes(checkingUrl))) {
+      chrome.action.enable();
+    } else {
+      chrome.action.disable();
+    }
   });
 });
