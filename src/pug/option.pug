@@ -8,13 +8,13 @@ html(lang="en")
   body 
     h2 Setting your speed range bar value.
     p Default Speed :
-    input(type="number" min="0.0" id="default" step="0.1")
+    input(type="number" min="0.0" id="default-speed" step="0.1")
+    p Max Speed : The value must large than 0 and less than 16.
+    input(type="number" min="0.0" id="max-speed" step="0.1")
+    p Min Speed : The value must large than 0.
+    input(type="number" min="0.0" id="min-speed" step="0.1")
     p Slider interval :
     input(type="number" min="0.0" id="sInterval" step="0.1")
-    p Max Speed : The value must large than 0 and less than 10.
-    input(type="number" min="0.0" id="max" step="0.1")
-    p Min Speed : The value must large.
-    input(type="number" min="0.0" id="min" step="0.1")
     br
     br
     button(id="save") Save

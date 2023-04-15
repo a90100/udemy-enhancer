@@ -6,8 +6,10 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Document
   body 
-    div(class="sliderContainer")
+    div(class="slider-container")
       p(class="feature-title") You can adjust the range bar to change the video speed.
-      input(type="range" value="0" min="0" max="5" step="0.1" id="slider")
-      span(id="output")
-
+      div(class="slider-bar")
+        span(id="min-speed")
+        input(type="range" step="0.1" id="slider")
+        span(id="max-speed")
+      div(id="output")
