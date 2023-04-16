@@ -1,3 +1,32 @@
+@import "theme/color.scss";
+
+body {
+  margin: 20px;
+}
+
+h2 {
+  font-weight: normal;
+}
+
 p {
-  font-size: 20px;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+input {
+  border: 1px solid $deepBlack;
+  height: 24px;
+  padding-left: 5px;
+}
+
+input:focus-visible {
+  outline: none;
+}
+
+#save-btn {
+  background-color: $purple;
+  color:  $white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
 }
