@@ -13,13 +13,38 @@ document.addEventListener('DOMContentLoaded', function () {
     minSpeed.value = result.minSpeed;
     sInterval.value = result.sliderInterval;
   });
-
-  maxSpeed.addEventListener('input', (e) => {
-    if (e.target.value > 16) e.target.value = 16;
-    if (e.target.value <= 0) e.target.value = 0.1;
-  });
-
-  minSpeed.addEventListener('input', (e) => {
-    if (e.target.value <= 0) e.target.value = 0.1;
-  });
 });
+
+const saveBtn = document.getElementById('save-btn');
+
+saveBtn.addEventListener('click', () => {
+  const defaultSpeed = document.getElementById('default-speed');
+  const maxSpeed = document.getElementById('max-speed');
+  const minSpeed = document.getElementById('min-speed');
+  const sInterval = document.getElementById('sInterval');
+
+  let maxSpeedValue = maxSpeed.value;
+  let minSpeedValue = minSpeed.value;
+
+  if (maxSpeedValue > 16) {
+    maxSpeedValue = 16;
+    maxSpeed.value = 16;
+  }
+  if (maxSpeedValue <= 0) {
+    maxSpeedValue = 0.1;
+    maxSpeed.value = 0.1;
+  }
+  if (minSpeedValue <= 0) {
+    minSpeedValue = 0.1;
+    minSpeed.value = 0.1;
+  }
+
+  chrome.storage.local.set({
+    defaultSpeed: defaultSpeed.value,
+    maxSpeed: maxSpeedValue,
+    minSpeed: minSpeedValue,
+    sliderInterval: sInterval.value,
+  });
+
+  alert('You stored the value successfully!');
+})
