@@ -47,4 +47,4 @@ saveBtn.addEventListener('click', () => {
   });
 
   alert('You stored the value successfully!');
-})
+});

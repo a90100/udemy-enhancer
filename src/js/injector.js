@@ -1,7 +1,7 @@
 // 用來操作、監聽 DOM 的檔案
 
 const observer = new MutationObserver(() => {
-  chrome.storage?.local?.get(['defaultSpeed'], ({ defaultSpeed }) => {
+	chrome.storage?.local?.get(['defaultSpeed'], ({ defaultSpeed }) => {
     setVideoSpeed(defaultSpeed);
   });
 });
