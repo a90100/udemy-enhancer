@@ -1,0 +1,35 @@
+@import 'theme/color.scss';
+
+.full-web-page-btn {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  position: relative;
+}
+
+.icon {
+  color: $iconGray;
+  font-size: 20px;
+  margin-right: 6px;
+
+  &:hover {
+    color: $white;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  top: -45px;
+  left: -85px;
+  width: 170px;
+  padding: 10px;
+  color: $white;
+  background-color: $toolTipBg;
+  border: 1px solid $toolTipBorder;
+  transform: scale(1);
+  transition: 0.03s;
+}
+
+.hidden-tooltip {
+  transform: scale(0);
+}
