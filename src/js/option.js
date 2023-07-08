@@ -46,5 +46,5 @@ saveBtn.addEventListener('click', () => {
     sliderInterval: sInterval.value,
   });
 
-  alert('You stored the value successfully!');
+  alert('You stored the value successfully! Please reload the Udemy Website.');
 });

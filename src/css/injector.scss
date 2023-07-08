@@ -1,35 +1,97 @@
 @import 'theme/color.scss';
 
-.full-web-page-btn {
+// --------------- speed control bar ----------------
+.slider-bar {
+  position: absolute;
+  top: -45px;
+  left: -260px;
+  width: 520px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  background-color: $toolTipBg;
+  color: $white;
+  transform: scale(1);
+}
+
+#slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 12px;
+  width: 200px;
+  border-radius: 10em;
+  background-color: $lightPurple;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+#slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: $purple;
+  cursor: pointer;
+}
+
+#slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: $deepPurple;
+  cursor: pointer;
+}
+
+#currentSpeed {
+  width: 20px;
+  margin: 2px 6px 0 0;
+}
+// ----------------------------------
+
+.config-btn {
   cursor: pointer;
   border: none;
   background-color: transparent;
   position: relative;
-}
-
-.icon {
   color: $iconGray;
-  font-size: 20px;
-  margin-right: 6px;
-
   &:hover {
     color: $white;
   }
 }
 
+.icon {
+  font-size: 20px;
+  margin: 0 6px;
+}
+
 .tooltip {
   position: absolute;
   top: -45px;
-  left: -85px;
-  width: 170px;
+
   padding: 10px;
   color: $white;
   background-color: $toolTipBg;
   border: 1px solid $toolTipBorder;
   transform: scale(1);
-  transition: 0.03s;
+  transition: 0.02s;
 }
 
-.hidden-tooltip {
+.full-web-page-btn-tooltip {
+  left: -85px;
+  width: 170px;
+}
+
+.video-speed-btn-tooltip {
+  left: -110px;
+  width: 220px;
+}
+
+.hidden-element {
   transform: scale(0);
+}
+
+.display-flex {
+  display: flex;
+  align-items: center;
 }
