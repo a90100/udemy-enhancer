@@ -8,7 +8,7 @@ const pipBtnTooltip = document.createElement('div');
 pipBtnTooltip.textContent += 'Picture-in-picture.';
 pipBtnTooltip.classList.add('tooltip', 'pip-btn-tooltip', 'hidden-element');
 
-// Check PIP API works in current browser.
+// 確認 PIP API 在目前瀏覽器可以執行
 if ('pictureInPictureEnabled' in document) {
   pipBtn.append(pipBtnIcon, pipBtnTooltip);
 }
@@ -20,6 +20,7 @@ pipBtn.addEventListener('mouseover', () => {
 pipBtn.addEventListener('mouseleave', () => {
   pipBtnTooltip.classList.add('hidden-element');
 });
+// -------------------------------------------------------
 
 let videoDOMElement = null;
 let isPIPOpen = false;
@@ -48,4 +49,4 @@ pipBtn.addEventListener('click', (e) => {
   }
 });
 
-export { pipBtn, getVideoDom };
+export { pipBtn, getVideoDom, videoDOMElement };

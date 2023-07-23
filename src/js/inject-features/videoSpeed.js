@@ -8,6 +8,15 @@ const videoControlBtnTooltip = document.createElement('div');
 videoControlBtnTooltip.textContent += 'Click to open speed control bar.';
 videoControlBtnTooltip.classList.add('tooltip', 'video-speed-btn-tooltip', 'hidden-element');
 
+videoControlBtn.addEventListener('mouseover', () => {
+  videoControlBtnTooltip.classList.remove('hidden-element');
+});
+
+videoControlBtn.addEventListener('mouseleave', () => {
+  videoControlBtnTooltip.classList.add('hidden-element');
+});
+// -------------------------------------------------------
+
 const sliderBarContainer = document.createElement('div');
 sliderBarContainer.classList.add('slider-bar', 'hidden-element');
 
@@ -29,14 +38,6 @@ sliderBar.addEventListener('input', (e) => {
   currentSpeed.innerHTML = `${e.target.value}X`;
 
   chrome.storage.local.set({ defaultSpeed: e.target.value });
-});
-
-videoControlBtn.addEventListener('mouseover', () => {
-  videoControlBtnTooltip.classList.remove('hidden-element');
-});
-
-videoControlBtn.addEventListener('mouseleave', () => {
-  videoControlBtnTooltip.classList.add('hidden-element');
 });
 
 videoControlBtn.addEventListener('click', () => {

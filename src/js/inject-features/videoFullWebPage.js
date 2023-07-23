@@ -10,6 +10,15 @@ fullWebPageBtnTooltip.classList.add('tooltip', 'full-web-page-btn-tooltip', 'hid
 
 fullWebPageBtn.append(fullWebPageBtnIcon, fullWebPageBtnTooltip);
 
+fullWebPageBtn.addEventListener('mouseover', () => {
+  fullWebPageBtnTooltip.classList.remove('hidden-element');
+});
+
+fullWebPageBtn.addEventListener('mouseout', () => {
+  fullWebPageBtnTooltip.classList.add('hidden-element');
+});
+// -------------------------------------------------------
+
 let isFullWebPage = false;
 let videoHeightDomElements = null;
 
@@ -30,14 +39,6 @@ fullWebPageBtn.addEventListener('click', () => {
   }
 
   isFullWebPage = !isFullWebPage;
-});
-
-fullWebPageBtn.addEventListener('mouseover', () => {
-  fullWebPageBtnTooltip.classList.remove('hidden-element');
-});
-
-fullWebPageBtn.addEventListener('mouseout', () => {
-  fullWebPageBtnTooltip.classList.add('hidden-element');
 });
 
 export { fullWebPageBtn, observeVideoHeightDomElements };
