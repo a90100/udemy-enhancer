@@ -92,6 +92,11 @@
   width: 140px;
 }
 
+.screenshot-btn-tooltip {
+  left: -225px;
+  width: 450px;
+}
+
 .hidden-element {
   transform: scale(0);
 }
@@ -99,4 +104,14 @@
 .display-flex {
   display: flex;
   align-items: center;
+}
+
+.selection-rect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #888;
+  border: 1px solid #000;
+  opacity: 0.3;
+  pointer-events: none;
 }

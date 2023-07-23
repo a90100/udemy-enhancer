@@ -9,8 +9,8 @@
     "48": "dist/images/magic-wand48.png",
     "128": "dist/images/magic-wand128.png"
   },
-  "permissions": ["https://*.udemy.com/*", "storage", "tabs"],
-  "host_permissions": ["https://*.udemy.com/*"],
+  "permissions": ["https://*.udemy.com/*", "storage", "tabs", "activeTab"],
+  "host_permissions": ["https://*.udemy.com/*", "<all_urls>"],
   "action": {
     "default_title": "Click Me",
     "default_popup": "dist/popup.html"

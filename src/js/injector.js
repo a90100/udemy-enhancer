@@ -6,6 +6,7 @@ import '../js/inject-features/videoSpeed';
 import { videoControlBtn, observeVideoSpeedDOM } from '../js/inject-features/videoSpeed';
 import { fullWebPageBtn, observeVideoHeightDomElements } from '../js/inject-features/videoFullWebPage';
 import { pipBtn, getVideoDom } from '../js/inject-features/pictureInPicture';
+import { screenShotBtn } from '../js/inject-features/screenShot';
 
 let isAppendBtns = false;
 let videoControlsBarDomElement = null;
@@ -45,6 +46,7 @@ const addConfigBtns = () => {
   videoControlsBarDomElement.insertBefore(videoControlBtn, voiceControlBtn);
   videoControlsBarDomElement.insertBefore(fullWebPageBtn, voiceControlBtn);
   videoControlsBarDomElement.insertBefore(pipBtn, voiceControlBtn);
+  videoControlsBarDomElement.insertBefore(screenShotBtn, voiceControlBtn);
 
   isAppendBtns = true;
 };
