@@ -30,5 +30,9 @@ If you want to set the minimum and maximum speed, and slider interval, please ri
 
 ![動畫7](https://github.com/a90100/udemy-enhancer/assets/31992650/ba6898f0-b218-4d92-9a7e-dcf7001bcfc2)
 
+You can right click the extension icon and select option page to update the slider interval, default, minimum and maximum speed.
+
+![動畫11](https://github.com/a90100/udemy-enhancer/assets/31992650/b34b913c-ebb8-4a05-8714-a0fec605ef7d)
+
 ## Contribute
 If you want to report bugs and contribute to this extension, please open an issue or a pull request.
