@@ -1,0 +1,17 @@
+@import "../theme/color.scss";
+
+.base-btn {
+  background-color: $purple;
+  color:  $white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.whiteBG-btn {
+  background-color: $white;
+  color:  $black;
+  padding: 10px 15px;
+  border: 1px solid $black;
+  cursor: pointer;
+}

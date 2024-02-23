@@ -1,4 +1,5 @@
 @import 'theme/color.scss';
+@import '../css/theme/component.scss';
 
 // --------------- speed control bar ----------------
 .slider-bar {
@@ -62,7 +63,7 @@
 
 .icon {
   font-size: 20px;
-  margin: 0 6px;
+  margin: 0 8px;
 }
 
 .tooltip {
@@ -93,8 +94,8 @@
 }
 
 .screenshot-btn-tooltip {
-  left: -225px;
-  width: 450px;
+  left: -150px;
+  width: 300px;
 }
 
 .hidden-element {
@@ -111,7 +112,23 @@
   top: 0;
   left: 0;
   background: #888;
-  border: 1px solid #000;
+  border: 1px solid $black;
   opacity: 0.3;
   pointer-events: none;
+}
+
+.screen-shot-model {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  background: $popModelBg;
+  z-index: 10000;
+}
+
+.display-none {
+  display: none;
 }

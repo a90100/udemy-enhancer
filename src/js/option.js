@@ -1,4 +1,5 @@
 import '../css/option.scss';
+import '../css/theme/component.scss';
 
 document.addEventListener('DOMContentLoaded', function () {
   const defaultSpeed = document.getElementById('default-speed');

@@ -5,7 +5,7 @@ const screenShotBtnIcon = document.createElement('i');
 screenShotBtnIcon.classList.add('fa-solid', 'fa-camera-retro', 'icon');
 
 const screenShotBtnTooltip = document.createElement('div');
-screenShotBtnTooltip.textContent += 'Click and drag on your screen to screenshot. Press Crtl+C to cancel.';
+screenShotBtnTooltip.textContent += 'Take a screenshot. Press Crtl+C to cancel.';
 screenShotBtnTooltip.classList.add('tooltip', 'screenshot-btn-tooltip', 'hidden-element');
 
 screenShotBtn.append(screenShotBtnIcon, screenShotBtnTooltip);
@@ -17,11 +17,62 @@ screenShotBtn.addEventListener('mouseover', () => {
 screenShotBtn.addEventListener('mouseout', () => {
   screenShotBtnTooltip.classList.add('hidden-element');
 });
+
+const captureAreaScreenShotBtn = document.createElement('button');
+captureAreaScreenShotBtn.innerText = 'Capture a specified screen region.\n Click and drag on your screen to take a screenshot.';
+captureAreaScreenShotBtn.classList.add('base-btn');
+captureAreaScreenShotBtn.style.marginBottom = '20px';
+const allScreenShotBtn = document.createElement('button');
+allScreenShotBtn.innerText = 'Full video image screenshot';
+allScreenShotBtn.classList.add('base-btn');
+allScreenShotBtn.style.marginBottom = '20px';
+const cancelScreenShotBtn = document.createElement('button');
+cancelScreenShotBtn.innerText = 'Cancel screenshot';
+cancelScreenShotBtn.classList.add('whiteBG-btn');
+
+// 選擇影片截圖方式的清單
+const screenShotTypeModel = document.createElement('div');
+screenShotTypeModel.appendChild(captureAreaScreenShotBtn);
+screenShotTypeModel.appendChild(allScreenShotBtn);
+screenShotTypeModel.appendChild(cancelScreenShotBtn);
+
+screenShotTypeModel.classList.add('screen-shot-model', 'display-none');
+document.body.append(screenShotTypeModel);
 // -------------------------------------------------------
 
-const rect = document.createElement('div');
-rect.classList.add('selection-rect');
-document.body.append(rect);
+const captureArea = document.createElement('div');
+captureArea.classList.add('selection-rect');
+document.body.append(captureArea);
+
+// 幫個位數時間補 0
+function pad(n) {
+  n = n + '';
+  return n.length >= 2 ? n : `0${n}`;
+}
+
+function getFormatTime(nowTime) {
+  return `${pad(nowTime.getFullYear())}-${pad(nowTime.getMonth() + 1)}-${pad(nowTime.getDate())} ${pad(nowTime.getHours())}-${pad(
+    nowTime.getMinutes()
+  )}-${pad(nowTime.getSeconds())}`;
+}
+
+function saveImg(url) {
+  const link = document.createElement('a');
+
+  link.download = `Udemy ScreenShot ${getFormatTime(new Date())}.jpeg`;
+  link.href = url;
+  link.click();
+}
+
+function isShowVideoBar(isShowBar) {
+  if (isShowBar) {
+    document.querySelector('[data-purpose="video-controls"]').style.display = 'flex';
+    document.querySelector('[data-purpose="video-progress-bar"]').classList.remove('display-none');
+  } else {
+    document.querySelector('[data-purpose="video-controls"]').style.display = 'none';
+    document.querySelector('[data-purpose="video-progress-bar"]').classList.add('display-none');
+  }
+}
 
 function captureImg(selectionRectangle, imgUrl) {
   const template = document.createElement('template');
@@ -62,36 +113,10 @@ function captureImg(selectionRectangle, imgUrl) {
   };
 
   img.src = imgUrl;
+  isShowVideoBar(true);
 }
 
-// 幫個位數時間補 0
-function pad(n) {
-  n = n + '';
-  return n.length >= 2 ? n : `0${n}`;
-}
-
-function getFormatTime(nowTime) {
-  return `${pad(nowTime.getFullYear())}-${pad(nowTime.getMonth() + 1)}-${pad(nowTime.getDate())} ${pad(nowTime.getHours())}-${pad(
-    nowTime.getMinutes()
-  )}-${pad(nowTime.getSeconds())}`;
-}
-
-function saveImg(url) {
-  const link = document.createElement('a');
-
-  link.download = `Udemy ScreenShot ${getFormatTime(new Date())}.jpeg`;
-  link.href = url;
-  link.click();
-}
-
-function drawSelectionRectangle(selection) {
-  rect.style.left = `${selection.left}px`;
-  rect.style.top = `${selection.top + window.scrollY}px`;
-  rect.style.width = `${selection.right - selection.left}px`;
-  rect.style.height = `${selection.bottom - selection.top}px`;
-}
-
-function initEventHandlers(base64Url) {
+function initScreentShotEvents(base64Url) {
   let isMouseDown = false;
   let selectionRectangle = {
     top: 0,
@@ -99,8 +124,14 @@ function initEventHandlers(base64Url) {
     right: 0,
     bottom: 0,
   };
-  let imgUrl = base64Url;
   document.querySelector('body').style.cursor = 'crosshair';
+
+  function drawSelectionRectangle(selection) {
+    captureArea.style.left = `${selection.left}px`;
+    captureArea.style.top = `${selection.top + window.scrollY}px`;
+    captureArea.style.width = `${selection.right - selection.left}px`;
+    captureArea.style.height = `${selection.bottom - selection.top}px`;
+  }
 
   function reset() {
     isMouseDown = false;
@@ -135,13 +166,13 @@ function initEventHandlers(base64Url) {
   }
 
   function onMouseUp() {
-    captureImg(selectionRectangle, imgUrl);
+    captureImg(selectionRectangle, base64Url);
     reset();
   }
 
   function cancelCapture(e) {
     // ctrl + c 取消截取
-    if (e.keyCode === 67 && e.ctrlKey) {
+    if (e.key.toLowerCase() === 'c' && e.ctrlKey) {
       reset();
     }
   }
@@ -149,14 +180,51 @@ function initEventHandlers(base64Url) {
   document.addEventListener('mousedown', onMouseDown);
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
-  // 滑鼠右鍵取消截取圖片
   document.addEventListener('keydown', cancelCapture);
 }
 
 screenShotBtn.addEventListener('click', () => {
-  chrome.runtime.sendMessage({ message: 'capture' }, (base64Url) => {
-    initEventHandlers(base64Url);
-  });
+  screenShotTypeModel.classList.toggle('display-none');
 });
 
-export { screenShotBtn };
+screenShotBtn.addEventListener('keydown', (e) => {
+  if (e.key.toLowerCase() === 'c' && e.ctrlKey) {
+    screenShotTypeModel.classList.add('display-none');
+  }
+});
+
+captureAreaScreenShotBtn.addEventListener('click', () => {
+  isShowVideoBar(false);
+  screenShotTypeModel.classList.add('display-none');
+  setTimeout(() => {
+    chrome.runtime.sendMessage({ message: 'capture' }, (base64Url) => {
+      initScreentShotEvents(base64Url);
+    });
+  }, 500);
+});
+
+allScreenShotBtn.addEventListener('click', () => {
+  isShowVideoBar(false);
+  screenShotTypeModel.classList.add('display-none');
+  const video = document.querySelector('video');
+  const header = document.querySelector('header');
+  setTimeout(() => {
+    chrome.runtime.sendMessage({ message: 'capture' }, (base64Url) => {
+      captureImg(
+        {
+          top: header.clientHeight,
+          left: 0,
+          right: video.clientWidth,
+          bottom: header.clientHeight + video.clientHeight,
+        },
+        base64Url
+      );
+    });
+  }, 500);
+});
+
+cancelScreenShotBtn.addEventListener('click', () => {
+  screenShotTypeModel.classList.add('display-none');
+});
+
+export { screenShotBtn, screenShotTypeModel };
