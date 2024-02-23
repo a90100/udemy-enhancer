@@ -6,7 +6,7 @@ import '../js/inject-features/videoSpeed';
 import { videoControlBtn, observeVideoSpeedDOM } from '../js/inject-features/videoSpeed';
 import { fullWebPageBtn, observeVideoHeightDomElements } from '../js/inject-features/videoFullWebPage';
 import { pipBtn, getVideoDom } from '../js/inject-features/pictureInPicture';
-import { screenShotBtn } from '../js/inject-features/screenShot';
+import { screenShotBtn, screenShotTypeModel } from '../js/inject-features/screenShot';
 
 let isAppendBtns = false;
 let videoControlsBarDomElement = null;
@@ -17,10 +17,12 @@ const observer = new MutationObserver(() => {
   observeVideoSpeedDOM();
   observeVideoHeightDomElements();
 
-  if (document.querySelector('video')) {
-    if (videoElementSrc !== document.querySelector('video').src) {
-      videoElementSrc = document.querySelector('video').src;
-      getVideoDom(document.querySelector('video'));
+  const videoEle = document.querySelector('video');
+  if (videoEle) {
+    if (videoElementSrc !== videoEle.src) {
+      videoElementSrc = videoEle.src;
+      getVideoDom(videoEle);
+      screenShotTypeModel.classList.add('display-none');
 
       isAppendBtns = false;
       videoControlsBarDomElement = null;
@@ -34,6 +36,14 @@ const observer = new MutationObserver(() => {
 
   if (videoControlsBarDomElement && !isAppendBtns) {
     addConfigBtns();
+  }
+
+  if (document.fullscreenElement) {
+    screenShotBtn.style.cursor = 'not-allowed';
+    screenShotBtn.disabled = true;
+  } else {
+    screenShotBtn.style.cursor = 'pointer';
+    screenShotBtn.disabled = false;
   }
 });
 

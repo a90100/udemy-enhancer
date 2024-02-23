@@ -26,6 +26,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
   });
 });
 
+// bind screenShot capture event
 chrome.runtime.onMessage.addListener((req, _, res) => {
   if (req.message === 'capture') {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabInfo) => {
