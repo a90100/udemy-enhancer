@@ -36,3 +36,12 @@ You can right click the extension icon and select option page to update the slid
 
 ## Contribute
 If you want to report bugs and contribute to this extension, please open an issue or a pull request.
+
+## Todo
+1. Dark Theme
+https://chromewebstore.google.com/detail/udemy-dark-theme/mnloceeicbhfhinjcnfieonmpindkmpb
+
+2. Auto play
+https://chromewebstore.google.com/detail/udemy-faster-autoplay/fepcpdjalebcocminbnogcgfbphllkeh
+
+3. User Tutorial

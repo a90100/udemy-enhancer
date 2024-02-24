@@ -21,7 +21,7 @@
   "options_page": "dist/option.html",
   "content_scripts": [
     {
-      "matches": ["https://*.udemy.com/*"],
+      "matches": ["https://*.udemy.com/course/*/learn/*"],
       "js": ["dist/js/injector.js"],
       "css": ["dist/css/injector.css"]
     }

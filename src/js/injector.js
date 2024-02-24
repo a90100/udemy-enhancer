@@ -3,7 +3,7 @@ import '../css/injector.scss';
 import '../utils/fontawesomeJS/all.min';
 
 import '../js/inject-features/videoSpeed';
-import { videoControlBtn, observeVideoSpeedDOM } from '../js/inject-features/videoSpeed';
+import { videoControlBtn, sliderBarContainer, observeVideoSpeedDOM } from '../js/inject-features/videoSpeed';
 import { fullWebPageBtn, observeVideoHeightDomElements } from '../js/inject-features/videoFullWebPage';
 import { pipBtn, getVideoDom } from '../js/inject-features/pictureInPicture';
 import { screenShotBtn, screenShotTypeModel } from '../js/inject-features/screenShot';
@@ -22,7 +22,6 @@ const observer = new MutationObserver(() => {
     if (videoElementSrc !== videoEle.src) {
       videoElementSrc = videoEle.src;
       getVideoDom(videoEle);
-      screenShotTypeModel.classList.add('display-none');
 
       isAppendBtns = false;
       videoControlsBarDomElement = null;
@@ -60,3 +59,16 @@ const addConfigBtns = () => {
 
   isAppendBtns = true;
 };
+
+document.addEventListener(
+  'click',
+  (e) => {
+    if (!videoControlBtn.contains(e.target) && sliderBarContainer && !sliderBarContainer.classList.contains('hidden-element')) {
+      sliderBarContainer.classList.add('hidden-element');
+    }
+    if (!screenShotBtn.contains(e.target) && screenShotTypeModel && !screenShotTypeModel.classList.contains('display-none')) {
+      screenShotTypeModel.classList.add('display-none');
+    }
+  },
+  true
+);
