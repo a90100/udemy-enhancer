@@ -40,13 +40,13 @@ sliderBar.addEventListener('input', (e) => {
   chrome.storage.local.set({ defaultSpeed: e.target.value });
 });
 
-videoControlBtn.addEventListener('click', () => {
-  if (!sliderBarContainer.classList.contains('hidden-element')) {
-    sliderBarContainer.classList.add('hidden-element');
-  } else {
-    sliderBarContainer.classList.remove('hidden-element');
-  }
-}, true);
+videoControlBtn.addEventListener(
+  'click',
+  () => {
+    sliderBarContainer.classList.toggle('hidden-element');
+  },
+  true
+);
 
 // 呈現 bar 資訊
 chrome.storage.local.get(['defaultSpeed', 'maxSpeed', 'minSpeed', 'sliderInterval'], (result) => {
@@ -64,26 +64,20 @@ sliderBarContainer.append(minSpeed, sliderBar, maxSpeed);
 
 videoControlBtn.append(currentSpeed, videoControlBtnIcon, videoControlBtnTooltip, sliderBarContainer);
 
-let videoDomElement = null;
-
-const setVideoSpeed = (speed) => {
-  if (videoDomElement) {
-    videoDomElement.playbackRate = speed;
+const setVideoSpeed = (speed, videoDom) => {
+  if (videoDom) {
+    videoDom.playbackRate = speed;
   }
 };
 
 const observeVideoSpeedDOM = () => {
   chrome.storage?.local?.get(['defaultSpeed'], ({ defaultSpeed }) => {
-    setVideoSpeed(defaultSpeed);
+    setVideoSpeed(defaultSpeed, document.getElementsByTagName('video')[0]);
   });
-
-  if (!videoDomElement) {
-    videoDomElement = document.getElementsByTagName('video')[0];
-  }
 };
 
 chrome.storage?.onChanged?.addListener((changes) => {
-  setVideoSpeed(changes.defaultSpeed.newValue);
+  setVideoSpeed(changes.defaultSpeed.newValue, document.getElementsByTagName('video')[0]);
 });
 
-export { videoControlBtn, observeVideoSpeedDOM };
+export { videoControlBtn, sliderBarContainer, observeVideoSpeedDOM };
