@@ -35,3 +35,5 @@ https://chromewebstore.google.com/detail/udemy-dark-theme/mnloceeicbhfhinjcnfieo
 https://chromewebstore.google.com/detail/udemy-faster-autoplay/fepcpdjalebcocminbnogcgfbphllkeh
 
 3. User Tutorial
+
+4. Fix the extending page feature that stops working after the webpage has been idle overnight.
